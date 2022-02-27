@@ -161,14 +161,15 @@ instead updated by the `display-wttr' function.")
 (defun display-wttr-sentinel (process event)
   "Update `display-wttr-string' only when the fetcher is done."
   (when (string= "finished\n" event)
-    (setq display-wttr-string (string-join display-wttr-list " "))))
+    (setq display-wttr-string
+          (concat (string-join display-wttr-list " ") " "))
+    (run-hooks 'display-wttr-hook))
+  (force-mode-line-update 'all))
 
 (defun display-wttr-filter (proc string)
   "Update the `display-wttr' info in the mode line."
   (add-to-list 'display-wttr-list
-               (string-join (split-string string) " ") t)
-  (run-hooks 'display-wttr-hook)
-  (force-mode-line-update 'all))
+               (string-join (split-string string) " ") t))
 
 (defun display-wttr-update ()
   "Creates a new background process to update wttr string."
