@@ -190,7 +190,7 @@ the currently running process."
    :sentinel 'display-wttr-sentinel ))
 
 (defun display-wttr-update-handler ()
-  "Updates wttr in mode line.
+  "Update wttr in mode line.
 Calcalutes and sets up the timer for the next update of wttr with
 the specified `display-wttr-interval'"
   (display-wttr-update)
