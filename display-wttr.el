@@ -1,7 +1,7 @@
 ;;; display-wttr.el --- Display wttr in mode line of Emacs -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022 Jose G Perez Taveras <josegpt27@gmail.com>
-;; Version: 0.0.3
+;; Version: 0.0.4
 
 ;; Permission is hereby granted, free of charge, to any person
 ;; obtaining a copy of this software and associated documentation
