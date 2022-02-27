@@ -128,8 +128,7 @@ For more information on the one-line output make sure to visit:
   :type 'integer)
 
 (defcustom display-wttr-hook nil
-  "List of functions to be called when the wttr is updated in the
-mode line."
+  "List of functions to be called when the wttr is updated in the mode line."
   :type 'hook)
 
 (defvar display-wttr-string nil
