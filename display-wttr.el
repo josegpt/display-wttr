@@ -43,8 +43,7 @@
   :type 'string)
 
 (defcustom display-wttr-location ""
-  "Display wttr location supports any combination of the
-`one-line output' of `https://wttr.in'
+  "Display wttr location supports any combination of the `one-line output'.
 
 Valid format values:
   Cities:
