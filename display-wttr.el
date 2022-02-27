@@ -146,31 +146,39 @@ instead updated by the `display-wttr' function.")
 ;;;###autoload(put 'display-wttr-list 'risky-local-variable t)
 
 (defvar display-wttr-timer nil
-  "Timer used by wttr")
+  "Timer used by wttr.")
 ;;;###autoload(put 'display-wttr-timer 'risky-local-variable t)
 
 (defun display-wttr-fetch-url ()
-  "Format uri for wttr to be used to fetch weather from
-`https://wttr.in'"
+  "Format uri for wttr to be used to fetch weather from `https://wttr.in'."
   (format "https://wttr.in/%s?format=%s"
           display-wttr-location
           display-wttr-format))
 
 (defun display-wttr-sentinel (process event)
-  "Update `display-wttr-string' only when the fetcher is done."
+  "Update `display-wttr-string' only when the fetcher is done.
+Argument PROCESS holds the process to which this function is
+running.
+Argument EVENT passes the status of the PROCESS."
+  (ignore process)
   (when (string= "finished\n" event)
     (setq display-wttr-string
           (concat (string-join display-wttr-list " ") " "))
     (run-hooks 'display-wttr-hook))
   (force-mode-line-update 'all))
 
-(defun display-wttr-filter (proc string)
-  "Update the `display-wttr' info in the mode line."
+(defun display-wttr-filter (process string)
+  "Update the `display-wttr' info in the mode line.
+Argument PROCESS holds the process to which this function is
+running.
+Argument STRING holds each line of stdin or stderr of
+the currently running process."
+  (ignore process)
   (add-to-list 'display-wttr-list
                (string-join (split-string string) " ") t))
 
 (defun display-wttr-update ()
-  "Creates a new background process to update wttr string."
+  "Create a new background process to update wttr string."
   (make-process
    :name "display-wttr"
    :command `("sh" "-c"
