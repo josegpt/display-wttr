@@ -182,7 +182,7 @@ instead updated by the `display-wttr' function.")
    :filter 'display-wttr-filter
    :sentinel 'display-wttr-sentinel ))
 
-(defun display-wttr-event-handler ()
+(defun display-wttr-update-handler ()
   "Updates wttr in mode line.
 Calcalutes and sets up the timer for the next update of wttr with
 the specified `display-wttr-interval'"
@@ -226,7 +226,7 @@ control the number of seconds between updates by customizing
     ;; Set initial timer
     (setq display-wttr-timer
           (run-at-time t display-wttr-interval
-                       'display-wttr-event-handler))
+                       'display-wttr-update-handler))
     (display-wttr-update)))
 
 (provide 'display-wttr)
