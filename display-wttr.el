@@ -208,7 +208,7 @@ the specified `display-wttr-interval'"
 ;;;###autoload
 (defun display-wttr ()
   "Enable display of wttr in mode line.
-This display updates automatically every hour. This runs the
+This display updates automatically every hour.  This runs the
 normal hook `display-wttr-hook' after each update."
   (interactive)
   (display-wttr-mode 1))
