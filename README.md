@@ -23,7 +23,21 @@ $ curl -s -o display-wttr.el https://raw.githubusercontent.com/josegpt/display-w
 # Depends on
 - curl
 
-# Advance configuration
+# use-package
+
+```emacs-lisp
+(use-package display-wttr
+  ;; :custom
+  ;; (display-wttr-interval (* 60 60))
+  ;; (display-wttr-location "")
+  ;; (display-wttr-fomart "4")
+  ;; (display-wttr-fetch-executable "curl")
+  ;; (display-wttr-fetch-options "-s")
+  :config
+  (display-wttr-mode))
+```
+
+# Configuration
 
 Display wttr by default does not set any location. However you can set
 a specific location by adding this line to `init.el` config.
@@ -57,20 +71,6 @@ The interval in which `display-wttr.el` will be updated can be modified.
 
 ```emacs-lisp
 (setq display-wttr-interval (* 60 60))
-```
-
-# use-package
-
-```emacs-lisp
-(use-package display-wttr
-  ;; :custom
-  ;; (display-wttr-interval (* 60 60))
-  ;; (display-wttr-location "")
-  ;; (display-wttr-fomart "4")
-  ;; (display-wttr-fetch-executable "curl")
-  ;; (display-wttr-fetch-options "-s")
-  :config
-  (display-wttr-mode))
 ```
 
 # LICENSE
