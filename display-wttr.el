@@ -139,6 +139,14 @@ It should not be set directly, but is instead updated by the
 `display-wttr' function.")
 ;;;###autoload(put 'display-wttr-string 'risky-local-variable t)
 
+(defvar display-wttr-list nil
+  "List of wttr unprocessed results.
+In this way a flash is avoided when updating
+`display-wttr-string'.
+It should not be set directly, but is
+instead updated by the `display-wttr' function.")
+;;;###autoload(put 'display-wttr-list 'risky-local-variable t)
+
 (defvar display-wttr-timer nil
   "Timer used by wttr")
 ;;;###autoload(put 'display-wttr-timer 'risky-local-variable t)
@@ -150,13 +158,29 @@ It should not be set directly, but is instead updated by the
           display-wttr-location
           display-wttr-format))
 
-(defun display-wttr-update (proc string)
+(defun display-wttr-sentinel (process event)
+  "Update `display-wttr-string' only when the fetcher is done."
+  (when (string= "finished\n" event)
+    (setq display-wttr-string (string-join display-wttr-list " "))))
+
+(defun display-wttr-filter (proc string)
   "Update the `display-wttr' info in the mode line."
-  (setq display-wttr-string
-        (concat display-wttr-string
-                (string-join (split-string string) " ") " "))
+  (add-to-list 'display-wttr-list
+               (string-join (split-string string) " ") t)
   (run-hooks 'display-wttr-hook)
   (force-mode-line-update 'all))
+
+(defun display-wttr-update ()
+  "Creates a new background process to update wttr string."
+  (make-process
+   :name "display-wttr"
+   :command `("sh" "-c"
+              ,(format "%s %s %s"
+                       display-wttr-fetch-executable
+                       display-wttr-fetch-options
+                       (display-wttr-fetch-url)))
+   :filter 'display-wttr-filter
+   :sentinel 'display-wttr-sentinel ))
 
 (defun display-wttr-event-handler ()
   "Updates wttr in mode line.
@@ -193,6 +217,7 @@ control the number of seconds between updates by customizing
   ;; Cancel timer if any is running
   (and display-wttr-timer (cancel-timer display-wttr-timer))
   (setq display-wttr-string "")
+  (setq display-wttr-list nil)
   (or global-mode-string (setq global-mode-string '("")))
   (when display-wttr-mode
     (or (memq 'display-wttr-string global-mode-string)
@@ -202,15 +227,7 @@ control the number of seconds between updates by customizing
     (setq display-wttr-timer
           (run-at-time t display-wttr-interval
                        'display-wttr-event-handler))
-    ;; Call background process to update string
-    (make-process
-     :name "display-wttr"
-     :command `("sh" "-c"
-                ,(format "%s %s %s"
-                         display-wttr-fetch-executable
-                         display-wttr-fetch-options
-                         (display-wttr-fetch-url)))
-     :filter 'display-wttr-update)))
+    (display-wttr-update)))
 
 (provide 'display-wttr)
 ;;; display-wttr.el ends here
