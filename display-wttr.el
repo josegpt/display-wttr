@@ -200,10 +200,10 @@ the specified `display-wttr-interval'"
                      (list (aref timer 1) (aref timer 2) (aref timer 3))
                      (* 5 (aref timer 4)) 0)))
     (or (time-less-p current next-time)
-        (prog
-         (timer-set-time timer (timer-next-integral-multiple-of-time
-                                current display-wttr-interval)
-                         (timer-activate timer))))))
+        (progn
+          (timer-set-time timer (timer-next-integral-multiple-of-time
+                                 current display-wttr-interval)
+                          (timer-activate timer))))))
 
 ;;;###autoload
 (defun display-wttr ()
