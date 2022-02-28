@@ -14,6 +14,9 @@
 
 ;;; Code:
 
+(unless (executable-find "curl")
+  (message "display-wttr: curl must be installed"))
+
 (defgroup display-wttr nil
   "Display wttr(weather) in the mode line."
   :prefix "display-wttr-"
