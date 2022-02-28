@@ -22,11 +22,7 @@
   :prefix "display-wttr-"
   :group 'mode-line)
 
-(defcustom display-wttr-fetch-executable "curl"
-  "Executable to be used by wttr to fetch information."
-  :type 'string)
-
-(defcustom display-wttr-fetch-options "-s"
+(defcustom display-wttr-curl-options "-s"
   "Options to be passed to the fetch executable used by wttr."
   :type 'string)
 
@@ -119,6 +115,10 @@ For more information on the one-line output make sure to visit:
   "List of functions to be called when the wttr is updated in the mode line."
   :type 'hook)
 
+(defvar display-wttr-curl-executable (executable-find "curl")
+  "Curl executable to be used by wttr to fetch information.")
+;;;###autoload(put 'display-wttr-curl-executable 'risky-local-variable t)
+
 (defvar display-wttr-string nil
   "String used in mode line to display wttr string.
 It should not be set directly, but is instead updated by the
@@ -187,8 +187,8 @@ the specified `display-wttr-interval'"
    :name "display-wttr"
    :command `("sh" "-c"
               ,(format "%s %s %s"
-                       display-wttr-fetch-executable
-                       display-wttr-fetch-options
+                       display-wttr-curl-executable
+                       display-wttr-curl-options
                        (display-wttr-fetch-url)))
    :filter 'display-wttr-filter
    :sentinel 'display-wttr-sentinel ))
