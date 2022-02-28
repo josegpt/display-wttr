@@ -1,0 +1,65 @@
+#+TITLE: display-wttr.el
+#+AUTHOR: Jose G Perez Taveras
+
+Display wttr in mode line of Emacs.
+
+=display-wttr.el= is not in GNU ELPA nor MELPA.
+
+#+CAPTION: display-wttr-screenshot
+#+NAME: display-wttr-screenshot
+[[./display-wttr.png]]
+
+* Quick start
+Users could install =display-wttr.el= package by downloading the =display-wttr.el= file and then adding it their path in their =init.el=
+
+#+BEGIN_SRC shell
+  $ cd ~/emacs/path
+  $ curl -s -o display-wttr.el https://raw.githubusercontent.com/josegpt/display-wttr/main/display-wttr.el
+#+END_SRC
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/emacs/path")
+  (display-wttr-mode 1)
+#+END_SRC
+* Requirements
++ curl
+* use-package
+#+BEGIN_SRC emacs-lisp
+  (use-package display-wttr
+    ;; :custom
+    ;; (display-wttr-interval (* 60 60))
+    ;; (display-wttr-location "")
+    ;; (display-wttr-fomart "4")
+    ;; (display-wttr-fetch-executable "curl")
+    ;; (display-wttr-fetch-options "-s")
+    :config
+    (display-wttr-mode))
+#+END_SRC
+* Configuration
+Display wttr by default does not set any location. However you can set
+a specific location by adding this line to =init.el= config.
+#+BEGIN_SRC emacs-lisp
+  (setq display-wttr-location "New+York")
+  ;; (setq display-wttr-location "{London,New+York}")
+  ;; (setq display-wttr-location "London:New+York")
+#+END_SRC
+
+Display wttr only allows [[https://github.com/chubin/wttr.in#one-line-output][one-line output]] from [[https://github.com/chubin/wttr.in][wttr.in]].
+#+BEGIN_SRC emacs-lisp
+  (setq display-wttr-format "4")
+  ;; (setq display-wttr-format "%l:+%c+%t\n")
+#+END_SRC
+
+If would like to use another executable to fetch for [[https://github.com/chubin/wttr.in][wttr.in]] data; you can replace =curl= by setting this in your =init.el= with your favorite =fetcher=.
+#+BEGIN_SRC emacs-lisp
+  (setq display-wttr-fetch-executable "curl")
+#+END_SRC
+
+Options passed to the =fetcher= can be modify.
+#+BEGIN_SRC emacs-lisp
+  (setq display-wttr-fetch-options "-s")
+#+END_SRC
+
+The interval in which =display-wttr.el= will be updated can be modified.
+#+BEGIN_SRC emacs-lisp
+(setq display-wttr-interval (* 60 60))
+#+END_SRC
