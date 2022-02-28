@@ -1,4 +1,4 @@
-;;; display-wttr.el --- Display wttr in mode line of Emacs -*- lexical-binding: t -*-
+;;; display-wttr.el --- Display wttr(weather) in Emacs mode line -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022 Jose G Perez Taveras <josegpt27@gmail.com>
 
@@ -17,7 +17,7 @@
 ;;; Code:
 
 (defgroup display-wttr nil
-  "Display wttr in mode line of Emacs."
+  "Display wttr(weather) in Emacs mode line."
   :prefix "display-wttr-"
   :group 'mode-line)
 
