@@ -10,12 +10,15 @@ Display wttr in mode line of Emacs 🌧️.
 [[./display-wttr.png]]
 
 * Quick start
-Users could install =display-wttr.el= package by downloading the =display-wttr.el= file and then adding it their path in their =init.el=
+Users could install =display-wttr.el= package by downloading the =display-wttr.el= file and then adding it their path in their =init.el=.
 
+=command-line=
 #+BEGIN_SRC shell
   $ cd ~/emacs/path
   $ curl -s -o display-wttr.el https://raw.githubusercontent.com/josegpt/display-wttr/main/display-wttr.el
 #+END_SRC
+
+=init.el=
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/emacs/path")
   (display-wttr-mode 1)
