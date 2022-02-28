@@ -155,7 +155,7 @@ It should not be set directly, but is instead updated by the
           display-wttr-format))
 
 (defun display-wttr-sentinel (process event)
-  "Update `display-wttr-string' only when the fetcher is done.
+  "Update `display-wttr-string' only when the fetcher is finished.
 Argument PROCESS holds the process to which this function is
 running.
 Argument EVENT passes the status of the PROCESS."
