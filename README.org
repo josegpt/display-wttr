@@ -35,20 +35,24 @@ Download =display-wttr.el= to your local directory.
     (display-wttr-mode))
 #+END_SRC
 ** Manual
-Then add the =display-wttr.el= path to your Emacs ='load-path= and add the following to your Emacs config.
+Then add the =display-wttr.el= path to your Emacs =load-path= and add the following to your Emacs config.
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/emacs/path")
+
   ;; If you omit the location name, you will get the report
   ;; for your current location based on your IP address.
   ;; (setq display-wttr-location "New+York")
   ;; (setq display-wttr-location "{London,New+York}")
   ;; (setq display-wttr-location "London:New+York")
+
   ;; display-wttr supports any format from one-line output
   ;; https://github.com/chubin/wttr.in#one-line-output
   ;; (setq display-wttr-format "4")
   ;; (setq display-wttr-format "%l:+%c+%t\n")
+
   ;; Interval in which display-wttr.el will be updated.
   ;; (setq display-wttr-interval (* 60 60))
+
   ;; Options passed to curl
   ;; (setq display-wttr-curl-options "-s")
   (display-wttr-mode 1)
