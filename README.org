@@ -1,7 +1,7 @@
 #+TITLE: display-wttr.el
 #+AUTHOR: Jose G Perez Taveras
 
-Display wttr in mode line of Emacs.
+Display wttr in mode line of Emacs 🌧️.
 
 =display-wttr.el= is not in GNU ELPA nor MELPA.
 
