@@ -1,4 +1,4 @@
-;;; display-wttr.el --- Display wttr(weather) in Emacs mode line -*- lexical-binding: t -*-
+;;; display-wttr.el --- Display wttr(weather) in the mode line -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022 Jose G Perez Taveras <josegpt27@gmail.com>
 
@@ -8,7 +8,6 @@
 ;; Homepage: https://github.com/josegpt/display-wttr
 ;; Version: 0.0.5
 ;; Package-Requires: ((emacs "27.1"))
-;; Keywords: mode-line weather
 
 ;;; Commentary:
 
@@ -17,7 +16,7 @@
 ;;; Code:
 
 (defgroup display-wttr nil
-  "Display wttr(weather) in Emacs mode line."
+  "Display wttr(weather) in the mode line."
   :prefix "display-wttr-"
   :group 'mode-line)
 
