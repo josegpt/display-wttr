@@ -176,18 +176,6 @@ the currently running process."
   (add-to-list 'display-wttr-list
                (string-join (split-string string) " ") t))
 
-(defun display-wttr-update ()
-  "Create a new background process to update wttr string."
-  (make-process
-   :name "display-wttr"
-   :command `("sh" "-c"
-              ,(format "%s %s %s"
-                       display-wttr-fetch-executable
-                       display-wttr-fetch-options
-                       (display-wttr-fetch-url)))
-   :filter 'display-wttr-filter
-   :sentinel 'display-wttr-sentinel ))
-
 (defun display-wttr-update-handler ()
   "Update wttr in mode line.
 Calcalutes and sets up the timer for the next update of wttr with
@@ -203,6 +191,19 @@ the specified `display-wttr-interval'"
           (timer-set-time timer (timer-next-integral-multiple-of-time
                                  current display-wttr-interval)
                           (timer-activate timer))))))
+
+(defun display-wttr-update ()
+  "Create a new background process to update wttr string."
+  (setq display-wttr-list nil)
+  (make-process
+   :name "display-wttr"
+   :command `("sh" "-c"
+              ,(format "%s %s %s"
+                       display-wttr-fetch-executable
+                       display-wttr-fetch-options
+                       (display-wttr-fetch-url)))
+   :filter 'display-wttr-filter
+   :sentinel 'display-wttr-sentinel ))
 
 ;;;###autoload
 (defun display-wttr ()
@@ -223,7 +224,6 @@ control the number of seconds between updates by customizing
   ;; Cancel timer if any is running
   (and display-wttr-timer (cancel-timer display-wttr-timer))
   (setq display-wttr-string "")
-  (setq display-wttr-list nil)
   (or global-mode-string (setq global-mode-string '("")))
   (when display-wttr-mode
     (or (memq 'display-wttr-string global-mode-string)
