@@ -3,11 +3,10 @@
 ;; Copyright (C) 2022 Jose G Perez Taveras <josegpt27@gmail.com>
 
 ;; Author: Jose G Perez Taveras <josegpt27@gmail.com>
-;; Created: Feb 27, 2022
 ;; Maintainer: Jose G Perez Taveras <josegpt27@gmail.com>
-;; Homepage: https://github.com/josegpt/display-wttr
 ;; Version: 0.0.5
 ;; Package-Requires: ((emacs "27.1"))
+;; URL: https://github.com/josegpt/display-wttr
 
 ;;; Commentary:
 
