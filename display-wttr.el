@@ -139,10 +139,9 @@ It should not be set directly, but is instead updated by the
 
 (defvar display-wttr-list nil
   "List of wttr unprocessed results.
-In this way a flash is avoided when updating
-`display-wttr-string'.
-It should not be set directly, but is
-instead updated by the `display-wttr' function.")
+This way a flash is avoided when updating `display-wttr-string'.
+It should not be set directly, but is instead updated by the
+`display-wttr' function.")
 ;;;###autoload(put 'display-wttr-list 'risky-local-variable t)
 
 (defvar display-wttr-timer nil
