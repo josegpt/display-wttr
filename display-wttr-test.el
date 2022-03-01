@@ -3,8 +3,12 @@
 (require 'ert)
 (require 'display-wttr)
 
-(ert-deftest happy-path-test ()
-  (should (= (+ 1 2) 3)))
+(ert-deftest display-wttr-fetch-url-test ()
+  (should (string= (display-wttr-fetch-url) "https://wttr.in/?format=4"))
+  (setq display-wttr-location "New+York")
+  (setq display-wttr-format "2")
+  (should (equal (display-wttr-fetch-url) "https://wttr.in/New+York?format=2")))
+
 
 (defun display-wttr-update ()
   (setq display-wttr-list nil)
