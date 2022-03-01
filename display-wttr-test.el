@@ -9,6 +9,25 @@
   (setq display-wttr-format "2")
   (should (equal (display-wttr-fetch-url) "https://wttr.in/New+York?format=2")))
 
+(setq run-hooks-called nil)
+(defun run-hooks (&rest hooks)
+  (setq run-hooks-called t))
+
+(setq force-mode-line-update-called nil)
+(defun force-mode-line-update (&optional all)
+  (setq force-mode-line-update-called t))
+
+(ert-deftest display-wttr-sentinel-test ()
+  (setq run-hooks-called nil)
+  (display-wttr-sentinel "" "")
+  (setq force-mode-line-update-called nil)
+  (should (equal display-wttr-string nil))
+  (display-wttr-sentinel "" "finished\n")
+  (setq display-wttr-list '("display-wttr"))
+  (should (equal display-wttr-string "display-wttr "))
+  (should (equal run-hooks-called t))
+  (should (equal force-mode-line-update-called t)))
+
 
 (defun display-wttr-update ()
   (setq display-wttr-list nil)
