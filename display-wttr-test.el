@@ -28,6 +28,9 @@
   (should (equal run-hooks-called t))
   (should (equal force-mode-line-update-called t)))
 
+(ert-deftest display-wttr-filter-test ()
+  (display-wttr-filter "" "display-wttr")
+  (should (equal display-wttr-list '("display-wttr"))))
 
 (defun display-wttr-update ()
   (setq display-wttr-list nil)
