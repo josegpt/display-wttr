@@ -14,6 +14,8 @@
 
 ;;; Code:
 
+(require 'subr-x)
+
 (unless (executable-find "curl")
   (message "display-wttr: curl must be installed"))
 
