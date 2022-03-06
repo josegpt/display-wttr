@@ -19,3 +19,11 @@ INIT_PACKAGE_EL="(progn \
 "$EMACS" -Q -batch \
          --eval "$INIT_PACKAGE_EL"
 
+# Byte-compile
+
+"$EMACS" -Q -batch \
+         --eval "$INIT_PACKAGE_EL" \
+         -l display-wttr.el \
+         -f batch-byte-compile \
+         display-wttr.el
+
