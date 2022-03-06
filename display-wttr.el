@@ -7,6 +7,7 @@
 ;; Version: 0.0.7
 ;; Package-Requires: ((emacs "27.1"))
 ;; URL: https://github.com/josegpt/display-wttr
+;; SPDX-License-Identifier: GPL-3.0-only
 
 ;;; Commentary:
 
