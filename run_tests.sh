@@ -27,3 +27,12 @@ INIT_PACKAGE_EL="(progn \
          -f batch-byte-compile \
          display-wttr.el
 
+# Linting
+
+"$EMACS" -Q -batch \
+         --eval "$INIT_PACKAGE_EL" \
+         -L . \
+         --eval "(require 'package-lint)" \
+         -f package-lint-batch-and-exit \
+         display-wttr.el
+
