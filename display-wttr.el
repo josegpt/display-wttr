@@ -229,7 +229,7 @@ control the number of seconds between updates by customizing
     ;; Set initial timer
     (setq display-wttr-timer
           (run-at-time t display-wttr-interval
-                       'display-wttr-update-handler))
+                       #'display-wttr-update-handler))
     (display-wttr-update)))
 
 (provide 'display-wttr)
