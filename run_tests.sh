@@ -36,3 +36,10 @@ INIT_PACKAGE_EL="(progn \
          -f package-lint-batch-and-exit \
          display-wttr.el
 
+# Testing
+
+"$EMACS" -Q --batch \
+        --eval "$INIT_PACKAGE_EL" \
+         -l display-wttr.elc \
+         -l display-wttr-test.el \
+         -f ert-run-tests-batch-and-exit
