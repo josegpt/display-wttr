@@ -23,13 +23,17 @@
 
 (require 'subr-x)
 
-(unless (executable-find "curl")
-  (message "display-wttr: curl must be installed"))
-
 (defgroup display-wttr nil
   "Display wttr(weather) in the mode line."
   :prefix "display-wttr-"
   :group 'mode-line)
+
+(defvar display-wttr-curl-executable (executable-find "curl")
+  "Curl executable to be used by wttr to fetch information.")
+;;;###autoload(put 'display-wttr-curl-executable 'risky-local-variable t)
+
+(unless display-wttr-curl-executable
+  (user-error "Display-wttr: curl must be installed"))
 
 (defcustom display-wttr-curl-options "-s"
   "Options to be passed to the fetch executable used by wttr."
@@ -123,10 +127,6 @@ For more information on the one-line output make sure to visit:
 (defcustom display-wttr-hook nil
   "List of functions to be called when the wttr is updated in the mode line."
   :type 'hook)
-
-(defvar display-wttr-curl-executable (executable-find "curl")
-  "Curl executable to be used by wttr to fetch information.")
-;;;###autoload(put 'display-wttr-curl-executable 'risky-local-variable t)
 
 (defvar display-wttr-string nil
   "String used in mode line to display wttr string.
