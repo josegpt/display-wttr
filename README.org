@@ -1,9 +1,8 @@
 #+TITLE: display-wttr.el
 #+AUTHOR: Jose G Perez Taveras
+[[https://melpa.org/#/display-wttr][file:https://melpa.org/packages/display-wttr-badge.svg]]
 
 Display wttr(weather) in the mode line 🌧️.
-
-=display-wttr.el= is not in GNU ELPA nor MELPA.
 
 * Screenshot
 #+CAPTION: display-wttr-screenshot
@@ -12,6 +11,14 @@ Display wttr(weather) in the mode line 🌧️.
 * Requirements
 + curl
 * Installation
+** MELPA
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives
+               '("melpa" . "https://melpa.org/packages/") t)
+#+END_SRC
+Then use M-x package-install RET =display-wttr= RET to install the
+package.
 ** Manual
 Download =display-wttr.el= to your local directory.
 *** Git
