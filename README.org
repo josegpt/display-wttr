@@ -1,6 +1,6 @@
 #+TITLE: display-wttr.el
 #+AUTHOR: Jose G Perez Taveras
-[[https://melpa.org/#/display-wttr][file:https://melpa.org/packages/display-wttr-badge.svg]]
+[[https://melpa.org/#/display-wttr][file:https://melpa.org/packages/display-wttr-badge.svg]] [[https://stable.melpa.org/#/display-wttr][file:https://stable.melpa.org/packages/display-wttr-badge.svg]]
 
 Display wttr(weather) in the mode line 🌧️.
 
