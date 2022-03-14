@@ -5,9 +5,14 @@
 Display wttr(weather) in the mode line 🌧️.
 
 * Screenshot
-#+CAPTION: display-wttr-screenshot
-#+NAME: display-wttr-screenshot
-[[./display-wttr.png]]
+  =Emacs with emoji support >=Emacs 28=
+  #+CAPTION: emoji-display-wttr
+  #+NAME: emoji-display-wttr
+  [[./emoji-display-wttr.png]]
+  =Emacs without emoji support <=Emacs 27.2=
+  #+CAPTION: no-emoji-display-wttr
+  #+NAME: no-emoji-display-wttr
+  [[./no-emoji-display-wttr.png]]
 * Requirements
 + curl
 * Installation
