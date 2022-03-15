@@ -56,8 +56,9 @@ Then add the =display-wttr.el= path to your Emacs =load-path= and add the follow
 
   ;; display-wttr supports any format from one-line output
   ;; https://github.com/chubin/wttr.in#one-line-output
-  ;; (setq display-wttr-format "4")
-  ;; (setq display-wttr-format "%l:+%c+%t\n")
+  ;; (setq display-wttr-format "4")            ; New York, United States: ☀️ 🌡️+28°F 🌬️→7mph
+  ;; (setq display-wttr-format "%l:+%c+%t")    ; New York, New York, United States: ☀️ +28°F
+  ;; (setq display-wttr-format "%C:+%t+%f+%w") ; Sunny: +28°F +28°F 0mph
 
   ;; Interval in which display-wttr.el will be updated.
   ;; (setq display-wttr-interval (* 60 60))

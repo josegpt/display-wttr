@@ -103,7 +103,7 @@ Examples:
   2: ☀️ 🌡️+28°F 🌬️→7mph
   3: New York, New York, United States: ☀️ +28°F
   4: New York, New York, United States: ☀️ 🌡️+28°F 🌬️→7mph
-  %l:+%c+%t\n: New York, New York, United States: ☀️ +28°F
+  %l:+%c+%t: New York, New York, United States: ☀️ +28°F
   %C:+%t+%f+%w: Sunny: +28°F +28°F 0mph
 For more information on the one-line output make sure to visit:
 `https://github.com/chubin/wttr.in#one-line-output'"
