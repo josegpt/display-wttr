@@ -4,9 +4,9 @@
 (require 'display-wttr)
 
 (ert-deftest display-wttr-fetch-url-test ()
-  (should (string= (display-wttr-fetch-url "") "https://wttr.in/?format=4"))
-  (should (string= (display-wttr-fetch-url "New+York") "https://wttr.in/New+York?format=4"))
-  (should (string= (display-wttr-fetch-url "New+Jersey") "https://wttr.in/New+Jersey?format=4")))
+  (should (string= (display-wttr--fetch-url "") "https://wttr.in/?format=4"))
+  (should (string= (display-wttr--fetch-url "New+York") "https://wttr.in/New+York?format=4"))
+  (should (string= (display-wttr--fetch-url "New+Jersey") "https://wttr.in/New+Jersey?format=4")))
 
 (defun display-wttr-update ()
   (setq display-wttr-list '("display-wttr"))
