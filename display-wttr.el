@@ -28,18 +28,7 @@
   :prefix "display-wttr-"
   :group 'mode-line)
 
-(defvar display-wttr-curl-executable (executable-find "curl")
-  "Curl executable to be used by wttr to fetch information.")
-;;;###autoload(put 'display-wttr-curl-executable 'risky-local-variable t)
-
-(unless display-wttr-curl-executable
-  (user-error "Display-wttr: curl must be installed"))
-
-(defcustom display-wttr-curl-options "-s"
-  "Options to be passed to the fetch executable used by wttr."
-  :type 'string)
-
-(defcustom display-wttr-location ""
+(defcustom display-wttr-locations '("")
   "Display wttr location supports any combination of the `one-line output'.
 
 Valid format values:
@@ -73,7 +62,7 @@ Valid format values:
 
 For more information on how to specify locations make sure to
 check: `https://github.com/chubin/wttr.in#one-line-output'"
-  :type 'string)
+  :type 'list)
 
 (defcustom display-wttr-format "4"
   "Format to be passed to wttr.
@@ -145,33 +134,43 @@ It should not be set directly, but is instead updated by the
   "Timer used by wttr.")
 ;;;###autoload(put 'display-wttr-timer 'risky-local-variable t)
 
-(defun display-wttr-fetch-url ()
-  "Format uri for wttr to be used to fetch weather from `https://wttr.in'."
+(defun display-wttr--fetch-url (location)
+  "Format uri for wttr to be used to fetch weather from `https://wttr.in'.
+Argument LOCATION holds the location to construct the url."
   (format "https://wttr.in/%s?format=%s"
-          display-wttr-location
+          location
           display-wttr-format))
 
-(defun display-wttr-sentinel (process event)
-  "Update `display-wttr-string' only when the fetcher is finished.
-Argument PROCESS holds the process to which this function is
-running.
-Argument EVENT passes the status of the PROCESS."
-  (ignore process)
-  (when (string= "finished\n" event)
+(defun display-wttr--clean-string (string)
+  "Encode to `utf-8' and remove all additional spaces from STRING."
+  (decode-coding-string (string-join (split-string string) " ") 'utf-8))
+
+(defun display-wttr--url-retrieve (location)
+  "Create an asynchronous retrieval when it is done call `display-wttr-filter'.
+Argument LOCATION holds the location to fetch info from."
+  (url-retrieve
+   (display-wttr--fetch-url location) #'display-wttr--filter nil t t))
+
+(defun display-wttr--sentinel ()
+  "Update `display-wttr-string' only when fetching all locations is finished."
+  (when (= (length display-wttr-locations) (length display-wttr-list))
     (setq display-wttr-string
           (concat (string-join display-wttr-list " ") " "))
-    (run-hooks 'display-wttr-hook))
-  (force-mode-line-update 'all))
+    (run-hooks 'display-wttr-hook)
+    (force-mode-line-update 'all)))
 
-(defun display-wttr-filter (process string)
+(defun display-wttr--filter (status)
   "Update the `display-wttr' info in the mode line.
-Argument PROCESS holds the process to which this function is
-running.
-Argument STRING holds each line of stdin or stderr of
-the currently running process."
-  (ignore process)
-  (add-to-list 'display-wttr-list
-               (string-join (split-string string) " ") t))
+Argument STATUS status is a plist representing what happened
+during the retrieval."
+  (ignore status)
+  (with-current-buffer (current-buffer)
+    (goto-char (point-min))
+    (re-search-forward "^$")
+    (delete-region (1+ (point)) (point-min))
+    (add-to-list 'display-wttr-list
+                 (display-wttr--clean-string (buffer-string))))
+  (display-wttr--sentinel))
 
 (defun display-wttr-update-handler ()
   "Update wttr in mode line.
@@ -192,15 +191,8 @@ the specified `display-wttr-interval'"
 (defun display-wttr-update ()
   "Create a new background process to update wttr string."
   (setq display-wttr-list nil)
-  (make-process
-   :name "display-wttr"
-   :command `("sh" "-c"
-              ,(format "%s %s %s"
-                       display-wttr-curl-executable
-                       display-wttr-curl-options
-                       (display-wttr-fetch-url)))
-   :filter 'display-wttr-filter
-   :sentinel 'display-wttr-sentinel ))
+  (dolist (location display-wttr-locations)
+    (display-wttr--url-retrieve location)))
 
 ;;;###autoload
 (defun display-wttr ()
