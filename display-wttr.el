@@ -156,7 +156,8 @@ Argument LOCATION holds the location to fetch info from."
   (when (= (length display-wttr-locations) (length display-wttr-list))
     (let ((wttr-string (string-join display-wttr-list " ")))
       (setq display-wttr-string
-            (concat (unless (string-match (rx (: bol "Unknown location;")) wttr-string)
+            (concat (unless (string-match (rx (: bol "Unknown location;"))
+                                          wttr-string)
                       wttr-string)
                     " ")))
     (run-hooks 'display-wttr-hook)
