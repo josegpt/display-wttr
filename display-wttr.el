@@ -154,8 +154,11 @@ Argument LOCATION holds the location to fetch info from."
 (defun display-wttr--sentinel ()
   "Update `display-wttr-string' only when fetching all locations is finished."
   (when (= (length display-wttr-locations) (length display-wttr-list))
-    (setq display-wttr-string
-          (concat (string-join display-wttr-list " ") " "))
+    (let ((wttr-string (string-join display-wttr-list " ")))
+      (setq display-wttr-string
+            (concat (unless (string-match (rx (: bol "Unknown location;")) wttr-string)
+                      wttr-string)
+                    " ")))
     (run-hooks 'display-wttr-hook)
     (force-mode-line-update 'all)))
 
