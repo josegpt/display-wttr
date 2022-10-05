@@ -178,7 +178,7 @@ during the retrieval."
 
 (defun display-wttr-update-handler ()
   "Update wttr in mode line.
-Calcalutes and sets up the timer for the next update of wttr with
+Calculates and sets up the timer for the next update of wttr with
 the specified `display-wttr-interval'"
   (display-wttr-update)
   (let* ((current (current-time))
